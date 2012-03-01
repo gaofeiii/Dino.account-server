@@ -8,6 +8,7 @@ gem 'rails', '3.2.1'
 gem 'sqlite3'
 gem 'mysql2'
 gem 'unicorn'
+gem 'bcrypt-ruby'
 
 group :development do
   gem 'rspec-rails', '2.8.1'
