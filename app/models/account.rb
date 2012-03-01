@@ -4,5 +4,6 @@ class Account < ActiveRecord::Base
   has_secure_password
   
   validates :email, :presence => true,
-                    :format => email_regex
+                    :format => email_regex,
+                    :uniqueness => { :case_sensitive => false }
 end

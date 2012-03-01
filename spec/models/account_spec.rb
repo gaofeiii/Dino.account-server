@@ -16,6 +16,11 @@ describe Account do
       Account.new(@attr.merge(:email => "bademail")).should_not be_valid
     end
     
+    it "should not be valid when email is used" do
+      Account.create @attr
+      Account.new(@attr).should_not be_valid
+    end
+    
     it "should not be valid when password is blank" do
       Account.new(@attr.merge(:password => "")).should_not be_valid
     end
