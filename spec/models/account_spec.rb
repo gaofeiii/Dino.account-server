@@ -18,7 +18,7 @@ describe Account do
     
     it "should not be valid when email is used" do
       Account.create @attr
-      Account.new(@attr).should_not be_valid
+      Account.new(@attr.merge(:email => "GAOFEI@email.com")).should_not be_valid
     end
     
     it "should not be valid when password is blank" do
