@@ -1,4 +1,6 @@
 Accounts::Application.routes.draw do
+  resources :accounts
+  match 'signup' => 'accounts#create', :via => :post
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
