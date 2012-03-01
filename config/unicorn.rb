@@ -1,14 +1,14 @@
 worker_processes 2
 
-working_directory "/var/games/servers/dream2012/current"
+working_directory "/var/games/servers/accounts/current"
 
 listen "/tmp/accounts.sock", :backlog => 128
 
 preload_app true
 timeout 30
 pid "/var/games/servers/accounts/shared/pids/unicorn.pid"
-stderr_path "/var/games/servers/dream2012/shared/log/unicorn.stderr.log"
-stdout_path "/var/games/servers/dream2012/shared/log/unicorn.stdout.log"
+stderr_path "/var/games/servers/accounts/shared/log/unicorn.stderr.log"
+stdout_path "/var/games/servers/accounts/shared/log/unicorn.stdout.log"
 
 before_fork do |server, worker|
   # the following is highly recomended for Rails + "preload_app true"
