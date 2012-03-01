@@ -1,5 +1,6 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require "rvm/capistrano"
+require 'bundler/capistrano'
 
 # Server list
 @test = "58.215.185.140"
@@ -9,6 +10,8 @@ require "rvm/capistrano"
 
 set :rvm_ruby_string, "1.9.3@rails321"
 set :rvm_type, :user
+
+set :bundle_dir, '$HOME/.rvm/gems/ruby-1.9.3-p125@rails321'
 
 default_run_options[:pty] = true
 set :user, "gaofei"
