@@ -27,6 +27,7 @@ set :keep_releases, 5
 set :repository,  "git@58.215.185.140:/git/accounts.git"
 set :scm, :git
 set :branch, "master"
+set :scm_passphrase, "123"
 
 role :web, eval("@#{@@server}")
 role :app, eval("@#{@@server}")

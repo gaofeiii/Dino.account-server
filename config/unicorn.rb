@@ -1,10 +1,10 @@
 worker_processes 4
 
-listen "/var/www/apps/accounts/shared/pids/uniconr.pid", :backlog => 64
+listen "/var/games/servers/accounts/shared/pids/unicorn.pid", :backlog => 128
 
 preload_app true
 timeout 30
-pid "/var/www/apps/accounts/shared/pids/uniconr.pid"
+pid "/var/games/servers/accounts/shared/pids/unicorn.pid"
 
 before_fork do |server, worker|
   # the following is highly recomended for Rails + "preload_app true"
