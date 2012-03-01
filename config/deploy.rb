@@ -1,35 +1,69 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require "rvm/capistrano"
 
+# Server list
+@test = "58.215.185.140"
+
+# Deploy server
+@@server = :test
+
 set :rvm_ruby_string, "1.9.3@rails321"
 set :rvm_type, :user
 
+default_run_options[:pty] = true
+set :user, "gaofei"
+set :runner, "gaofei"
+set :ssh_options,   { :forward_agent => true }
 set :application, "accounts"
-set :user, "xiaojuhua"
-set :password, "really"
-set :runner, "xiaojuhua"
-set :deploy_to, "/var/www/apps/#{application}"
+set :deploy_to, "/var/games/servers/#{application}"
 set :deploy_via, :remote_cache
+set :rails_env, :production
 set :use_sudo, false
 set :keep_releases, 5
 
-set :repository,  "git@96.126.121.100:/git/accounts.git"
+set :repository,  "git@58.215.185.140:/git/accounts.git"
 set :scm, :git
 set :branch, "master"
 
-role :web, "96.126.121.100"                        # Your HTTP server, Apache/etc
-role :app, "96.126.121.100"                          # This may be the same as your `Web` server
-role :db,  "96.126.121.100", :primary => true # This is where Rails migrations will run
-# role :db,  "your slave db-server here"
+role :web, eval("@#{@@server}")
+role :app, eval("@#{@@server}")
+role :db,  eval("@#{@@server}"), :primary => true # This is where Rails migrations will run
+
+namespace :deploy do
+  %w(start stop restart).each do |action|
+    desc "unicorn:#{action}"
+    task action.to_sym do
+      find_and_execute_task("unicorn:#{action}")
+    end
+  end
+ 
+end
+
+namespace :rvm do
+  task :trust_rvmrc do
+    run "rvm rvmrc trust \#\{release_path\}"
+  end
+end
+
+# 如果有rvmrc文件需要执行 trust_rvmrc
+# after "deploy", "rvm:trust_rvmrc"
+after "deploy", "deploy:migrate"
 
 namespace :unicorn do
-  desc "start unicorn"
-  task :start do
-    run "unicorn -c #{current_path}/config/unicorn.rb -E production -D"
-  end
-  
-  desc "stop unicorn"
-  task :stop do
-    run "kill -Q cat `#{shared_path}/pids/unicorn.pid`"
-  end
+  desc "Start unicorn"
+    task :start, :roles => :app do
+      run "cd #{current_path} && bundle exec unicorn -c #{current_path}/config/unicorn.rb -D -E production"
+    end
+
+    desc "Stop unicorn"
+    task :stop, :roles => :app do
+      run "kill -QUIT `cat #{current_path}/tmp/pids/unicorn.pid`"
+      sleep(3)
+    end
+
+    desc "Restart unicorn"
+    task :restart, :roles => :app do
+      find_and_execute_task("unicorn:stop")
+      find_and_execute_task("unicorn:start")
+    end
 end
