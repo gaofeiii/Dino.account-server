@@ -12,6 +12,12 @@ gem 'bcrypt-ruby'
 
 gem 'activeadmin'
 
+gem 'execjs'  
+gem 'therubyracer'
+
+
+gem 'sass-rails','~> 3.2.3'
+gem "meta_search",    '>= 1.1.0.pre'
 group :development do
   gem 'rspec-rails', '2.8.1'
   gem 'annotate', '2.4.0'
