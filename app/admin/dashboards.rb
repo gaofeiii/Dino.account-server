@@ -1,5 +1,11 @@
 ActiveAdmin::Dashboards.build do
-
+  section "recent users" do
+    ul do
+      Account.all.collect do |act|
+        li link_to(act.email, admin_account_path(act))
+      end
+    end
+  end
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
   # return the content which you would like to display.
