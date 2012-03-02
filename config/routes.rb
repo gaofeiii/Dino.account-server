@@ -1,6 +1,8 @@
 Accounts::Application.routes.draw do
-  resources :accounts
+  resources :accounts, :only => :create
   match 'signup' => 'accounts#create', :via => :post
+  
+  resources :sessions, :only => [:create, :destroy]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

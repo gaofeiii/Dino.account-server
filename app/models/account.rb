@@ -6,4 +6,11 @@ class Account < ActiveRecord::Base
   validates :email, :presence => true,
                     :format => email_regex,
                     :uniqueness => { :case_sensitive => false }
+
+  def logined?
+    
+  end
+
+
+                    
 end

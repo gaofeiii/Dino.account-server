@@ -39,4 +39,21 @@ describe Account do
       end.should change(Account, :count).by(1)
     end
   end
+
+
+  
+  describe "methods validations" do
+    
+    before(:each) do
+      @account = Factory(:account)
+    end
+        
+  end
+
+
+
+
+
+
+
 end
