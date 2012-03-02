@@ -1,6 +1,6 @@
 ActiveAdmin.register Game do
   index do
-    column :id
+    id_column
     column :name
     default_actions
   end

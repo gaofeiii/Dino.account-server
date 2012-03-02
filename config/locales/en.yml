@@ -6,6 +6,7 @@ en:
       models:
           account: "账户"
           game: "游戏"
+          server: "服务器"
       attributes:
           account:
               email: "邮箱"
@@ -15,6 +16,11 @@ en:
           game:
               name: "游戏名"
               created_at: "创建时间"
+          server:
+              name: "名称"
+              address: "地址"
+              locale: "语言"
+              
       errors:
           models:
               account:
