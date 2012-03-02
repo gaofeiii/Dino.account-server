@@ -5,11 +5,16 @@ en:
   activerecord:
       models:
           account: "账户"
+          game: "游戏"
       attributes:
           account:
               email: "邮箱"
               password: "密码"
               password_confirmation: "密码确认"
+              created_at: "创建时间"
+          game:
+              name: "游戏名"
+              created_at: "创建时间"
       errors:
           models:
               account:
