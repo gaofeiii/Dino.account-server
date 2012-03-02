@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
     if account.save
       render :json => account
     else
-      render :json => account.errors, :status => 999
+      render :json => account.errors.messages, :status => 999
     end
   end
 end

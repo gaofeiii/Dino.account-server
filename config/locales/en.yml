@@ -2,4 +2,21 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  activerecord:
+      models:
+          account: "账户"
+      attributes:
+          account:
+              email: "邮箱"
+              password: "密码"
+              password_confirmation: "密码确认"
+      errors:
+          models:
+              account:
+                  attributes:
+                      email:
+                          blank: "%{attribute}不能为空"
+                          invalid: "%{attribute}格式不正确哦，亲"
+                          taken: "该%{attribute}已经被注册"
+                      password:
+                          confirmation: "两次输入的%{attribute}不一样"
