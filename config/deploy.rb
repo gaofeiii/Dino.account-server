@@ -59,6 +59,7 @@ end
 # 如果有rvmrc文件需要执行 trust_rvmrc
 # after "deploy", "rvm:trust_rvmrc"
 after "deploy", "deploy:migrate"
+after "deploy", "assets:precompile"
 
 namespace :unicorn do
   desc "Start unicorn"

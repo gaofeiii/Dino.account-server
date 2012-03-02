@@ -65,5 +65,5 @@ Accounts::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   # config.action_mailer.default_url_options = { :host => 'http://58.215.185.140:9999' }
-  # config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
+  config.assets.precompile += %w[active_admin.css active_admin.js]
 end
