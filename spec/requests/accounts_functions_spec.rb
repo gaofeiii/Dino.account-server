@@ -10,9 +10,21 @@ describe "AccountsFunctions" do
     
     it "should create an account success" do
       lambda do
-        post 'signup', @attr
+        post '/signup', @attr
         response.should be_success
       end.should change(Account, :count).by(1)
+    end
+  end
+  
+  describe "Post 'Signin" do
+    
+    before(:each) do
+      @account = Factory(:account)
+    end
+    
+    it "should singin success" do
+      post '/signin', :session => { :email => @account.email, :password => @account.password }
+      response.should be_success
     end
   end
   
