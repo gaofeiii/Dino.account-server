@@ -43,6 +43,13 @@ namespace :deploy do
  
 end
 
+namespace :assets do
+  desc "assets:precompile"
+  task :precompile, :role => :app do
+    run "cd #{current_path} && bundle exec rake assets:precompile"
+  end
+end
+
 namespace :rvm do
   task :trust_rvmrc do
     run "rvm rvmrc trust \#\{release_path\}"
