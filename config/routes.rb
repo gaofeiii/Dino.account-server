@@ -8,6 +8,8 @@ Accounts::Application.routes.draw do
   
   resources :sessions, :only => [:create, :destroy]
   match '/signin' => 'sessions#create'
+  
+  resources :servers, :only => [:index]
 
     # The priority is based upon order of creation:
   # first created -> highest priority.
