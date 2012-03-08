@@ -1,6 +1,8 @@
 class ServersController < ApplicationController
   
   def index
-    render :json => Server.where(:game_id => params[:id])
+    game = Game.find_by_name(params[:game_name])
+    render :json => Server.where(:game_id => game.try(:id))
   end
+  
 end

@@ -4,6 +4,10 @@ Factory.define :account do |account|
   account.password_confirmation   "haha123"
 end
 
+Factory.define :game do |game|
+  game.name                       "Dinosaur"
+end
+
 Factory.define :server do |server|
   server.name                     "OMG"
   server.address                  "http://localhost:3000"
