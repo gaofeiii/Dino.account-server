@@ -28,4 +28,49 @@ describe "AccountsFunctions" do
     end
   end
   
+  describe "server list" do
+    
+    before(:each) do
+      @game = Factory(:game)
+      @server = Factory(:server, :game_id => @game.id)
+    end
+    
+    it "should get specified game server list" do
+      get '/server_list', :game_name => @game.name
+      response.should be_success
+      response.body.should include(@server.name)
+    end
+  end
+  
+  describe "user choose game server" do
+    
+    before(:each) do
+      @user = Factory(:account)
+      @game = Factory(:game)
+      @server = Factory(:server, :game_id => @game.id)
+    end
+    
+    it "should have the right route to choose a server" do
+      post_via_redirect('/choose_server', {:game_id => @game.id, :server_id => @server.id}, {"account_id" => @user.id})
+      response.should be_success
+      @user.should be_playing(@game)
+    end
+  end
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 end

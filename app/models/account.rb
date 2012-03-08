@@ -13,6 +13,8 @@ class Account < ActiveRecord::Base
     
   end
 
+  def playing?(game)
+    self.playings.map(&:game_id).include?(game.id)
+  end
 
-                    
 end

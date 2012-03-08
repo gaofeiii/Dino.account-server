@@ -10,6 +10,10 @@ Accounts::Application.routes.draw do
   match '/signin' => 'sessions#create'
   
   resources :servers, :only => [:index]
+  match '/server_list' => 'servers#index'
+  
+  resources :playings, :only => :create
+  match '/choose_server' => 'playings#create'
 
     # The priority is based upon order of creation:
   # first created -> highest priority.
