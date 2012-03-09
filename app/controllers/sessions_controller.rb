@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     if account
       render :json => account
     else
-      render :json => "Login failed!", :status => 999
+      render :json => "email/password doesn't match", :status => 999
     end
   end
   
