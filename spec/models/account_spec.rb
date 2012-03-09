@@ -47,7 +47,11 @@ describe Account do
     before(:each) do
       @account = Factory(:account)
     end
-        
+    
+    it "should have a specified to_json method" do
+      @account.to_json.should include("id")
+      @account.to_json.should_not include("created_at")
+    end    
   end
 
 
