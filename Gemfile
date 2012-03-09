@@ -30,6 +30,7 @@ group :test do
   gem 'autotest-fsevent', '0.2.7'
   gem 'autotest-growl', '0.2.16'
   gem 'factory_girl_rails'
+  gem 'simplecov'
 end
 
 # Gems used only for assets and not required
