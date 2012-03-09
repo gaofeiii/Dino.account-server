@@ -17,4 +17,7 @@ class Account < ActiveRecord::Base
     self.playings.map(&:game_id).include?(game.id)
   end
 
+  def as_json(args = nil)
+    self.attributes.slice("id", "email")
+  end
 end

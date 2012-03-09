@@ -2,8 +2,8 @@ class SessionsController < ApplicationController
   
   def create
     account = Account.find_by_email(params[:session][:email]).try(:authenticate, params[:session][:password])
-    unless account.nil?
-      render :json => "Login success!!!"
+    if account
+      render :json => account
     else
       render :json => "Login failed!", :status => 999
     end
