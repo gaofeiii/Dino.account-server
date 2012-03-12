@@ -25,6 +25,7 @@ group :test do
   gem 'rspec-rails', '2.8.1'
   gem 'autotest-rails', '4.1.2'
   gem 'factory_girl_rails'
+  gem 'simplecov'
 end
 
 # Gems used only for assets and not required

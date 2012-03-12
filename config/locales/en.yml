@@ -22,6 +22,8 @@ en:
               locale: "语言"
               
       errors:
+          messages:
+              empty_server: "服务器不存在哦亲"
           models:
               account:
                   attributes:
@@ -31,3 +33,9 @@ en:
                           taken: "该%{attribute}已经被注册"
                       password:
                           confirmation: "两次输入的%{attribute}不一样"
+              playing:
+                  attributes:
+                      server_id:
+                          empty_server: "服务器不存在"
+                          no_such_game: "游戏id错误"
+                  
