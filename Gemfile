@@ -11,24 +11,19 @@ gem 'unicorn'
 gem 'bcrypt-ruby'
 
 gem 'activeadmin'
-
 gem 'execjs'  
 gem 'therubyracer'
-
-
 gem 'sass-rails','~> 3.2.3'
 gem "meta_search",    '>= 1.1.0.pre'
+
 group :development do
   gem 'rspec-rails', '2.8.1'
-  gem 'annotate', '2.4.0'
   gem 'capistrano', '2.11.2'
 end
 
 group :test do
   gem 'rspec-rails', '2.8.1'
   gem 'autotest-rails', '4.1.2'
-  gem 'autotest-fsevent', '0.2.7'
-  gem 'autotest-growl', '0.2.16'
   gem 'factory_girl_rails'
 end
 
