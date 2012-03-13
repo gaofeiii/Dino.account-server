@@ -11,11 +11,8 @@ gem 'unicorn'
 gem 'bcrypt-ruby'
 
 gem 'activeadmin'
-
 gem 'execjs'  
 gem 'therubyracer'
-
-
 gem 'sass-rails','~> 3.2.3'
 gem "meta_search",    '>= 1.1.0.pre'
 
