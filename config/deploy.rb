@@ -3,7 +3,7 @@ require "rvm/capistrano"
 require 'bundler/capistrano'
 
 # Server list
-@test = "58.215.185.140"
+@test = "vm-192-168-14-216.shengyun.grandcloud.cn"
 
 # Deploy server
 @@server = :test
