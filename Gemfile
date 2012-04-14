@@ -19,11 +19,13 @@ gem "meta_search",    '>= 1.1.0.pre'
 group :development do
   gem 'rspec-rails', '2.8.1'
   gem 'capistrano', '2.11.2'
+  gem 'guard'
+  gem 'ruby_gntp'
+  gem 'hirb'
 end
 
 group :test do
   gem 'rspec-rails', '2.8.1'
-  gem 'autotest-rails', '4.1.2'
   gem 'factory_girl_rails'
   gem 'simplecov'
 end
