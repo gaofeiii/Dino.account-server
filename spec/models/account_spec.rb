@@ -5,7 +5,7 @@ describe Account do
   describe "validations" do
     
     before(:each) do
-      @attr = { :email => "gaofei@email.com", :password => "haha123", :password_confirmation => "haha123" }
+      @attr = { :username => "gaofei", :email => "gaofei@email.com", :password => "haha123", :password_confirmation => "haha123" }
     end
     
     it "should not be valid when email is blank" do

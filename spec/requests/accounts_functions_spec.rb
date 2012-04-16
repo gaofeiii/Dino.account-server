@@ -5,7 +5,7 @@ describe "AccountsFunctions" do
   describe "Post 'Signup'" do
     
     before(:each) do
-      @attr = { :email => "gaofei@email.com", :password => "haha123", :password_confirmation => "haha123" }
+      @attr = { :username => "gaofei", :email => "gaofei@email.com", :password => "haha123", :password_confirmation => "haha123" }
     end
     
     it "should create an account success" do

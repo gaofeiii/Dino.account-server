@@ -5,13 +5,14 @@ describe AccountsController do
   describe "POST create" do
     
     before(:each) do
-      @attr = { :email => "gaofei@email.com", :password => "haha123", :password_confirmation => "haha123" }
+      @attr = { :username => 'gaofei', :email => "gaofei@email.com", :password => "haha123", :password_confirmation => "haha123" }
     end
     
     it "should create user success" do
       lambda do
         post :create, @attr
         response.should be_success
+
       end.should change(Account, :count).by(1)
     end
     

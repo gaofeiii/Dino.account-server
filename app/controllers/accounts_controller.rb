@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   
   def create
-    account = Account.new params.slice(:email, :password, :password_confirmation)
+    account = Account.new params.slice(:username, :email, :password, :password_confirmation)
     if account.save
       render :json => account
     else
