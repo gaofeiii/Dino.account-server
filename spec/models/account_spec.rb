@@ -11,6 +11,10 @@ describe Account do
     it "should not be valid when email is invalid" do
       Account.new(@attr.merge(:email => "bademail")).should_not be_valid
     end
+
+    it "should be valid when email is nil" do
+      Account.new(@attr.merge(:email => nil)).should be_valid
+    end
     
     it "should not be valid when email is used" do
       Account.create @attr
@@ -47,7 +51,12 @@ describe Account do
     it "should have a specified to_json method" do
       @account.to_json.should include("id")
       @account.to_json.should_not include("created_at")
-    end    
+    end
+
+    it "should have a find_by_username_or_email method" do
+      Account.find_by_username_or_email(@account.email).should == @account
+      Account.find_by_username_or_email(@account.username).should == @account
+    end
   end
 
 

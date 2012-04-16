@@ -7,10 +7,7 @@ class Account < ActiveRecord::Base
   # name_reg = /
   has_secure_password
   
-  validates :email, :allow_nil => true,
-                    :allow_blank => true,
-                    :presence => false,
-                    # :acceptance => false,
+  validates :email, :allow_blank => true,
                     :format => email_reg,
                     :uniqueness => { :case_sensitive => false }
 

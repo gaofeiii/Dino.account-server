@@ -15,6 +15,13 @@ describe AccountsController do
 
       end.should change(Account, :count).by(1)
     end
+
+    it "should create user successfully without email" do
+      lambda do
+        post :create, @attr.merge(:email => nil)
+        response.should be_success
+      end.should change(Account, :count).by(1)
+    end
     
     it "should not allow to create an account" do
       lambda do
