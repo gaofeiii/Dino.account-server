@@ -10,7 +10,8 @@ gem 'mysql2'
 gem 'unicorn'
 gem 'bcrypt-ruby'
 gem 'erubis'
-gem 'activeadmin'
+gem "formtastic", "~> 2.1.1"
+gem 'activeadmin', "~> 0.4.3"
 gem 'execjs'  
 gem 'therubyracer'
 gem 'sass-rails','~> 3.2.3'

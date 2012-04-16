@@ -73,8 +73,8 @@ GEM
       railties (>= 3.0.0)
     fastercsv (1.5.4)
     ffi (1.0.11)
-    formtastic (2.2.0)
-      actionpack (>= 3.0)
+    formtastic (2.1.1)
+      actionpack (~> 3.0)
     guard (1.0.1)
       ffi (>= 0.5.0)
       thor (~> 0.14.6)
@@ -198,13 +198,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activeadmin
+  activeadmin (~> 0.4.3)
   bcrypt-ruby
   capistrano (= 2.11.2)
   coffee-rails (~> 3.2.1)
   erubis
   execjs
   factory_girl_rails
+  formtastic (~> 2.1.1)
   guard
   hirb
   jquery-rails

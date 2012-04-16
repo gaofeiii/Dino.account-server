@@ -13,13 +13,17 @@ en:
               password: "密码"
               password_confirmation: "密码确认"
               created_at: "创建时间"
+              updated_at: "更新时间"
           game:
               name: "游戏名"
               created_at: "创建时间"
+              updated_at: "更新时间"
           server:
               name: "名称"
               address: "地址"
               locale: "语言"
+              created_at: "创建时间"
+              updated_at: "更新时间"
               
       errors:
           messages:
