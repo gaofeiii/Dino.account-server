@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
   
   def create
-    account = Account.find_by_email(params[:session][:email]).try(:authenticate, params[:session][:password])
-    if account
+    account = Account.find_by_username(params[:username]) || Account.find_by_email(params[:email])
+    if account.try(:authenticate, params[:password])
       render :json => account
       # TODO: signin process
       # 验证用户名和密码通过，生成session_key

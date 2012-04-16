@@ -23,7 +23,7 @@ describe "AccountsFunctions" do
     end
     
     it "should singin success" do
-      post '/signin', :session => { :email => @account.email, :password => @account.password }
+      post '/signin', { :email => @account.email, :password => @account.password }
       response.should be_success
     end
   end

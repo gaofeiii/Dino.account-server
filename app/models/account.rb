@@ -19,6 +19,10 @@ class Account < ActiveRecord::Base
     
   end
 
+  def self.find_by_username_or_email(name_or_email)
+    Account.find_by_username(name_or_email) || Account.find_by_email(name_or_email)
+  end
+
   def playing?(game)
     self.playings.map(&:game_id).include?(game.id)
   end
