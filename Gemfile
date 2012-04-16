@@ -9,7 +9,7 @@ gem 'sqlite3'
 gem 'mysql2'
 gem 'unicorn'
 gem 'bcrypt-ruby'
-
+gem 'erubis'
 gem 'activeadmin'
 gem 'execjs'  
 gem 'therubyracer'

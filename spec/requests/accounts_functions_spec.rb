@@ -19,7 +19,7 @@ describe "AccountsFunctions" do
   describe "Post 'Signin" do
     
     before(:each) do
-      @account = Factory(:account)
+      @account = FactoryGirl.create(:account)
     end
     
     it "should singin success" do
@@ -31,8 +31,8 @@ describe "AccountsFunctions" do
   describe "server list" do
     
     before(:each) do
-      @game = Factory(:game)
-      @server = Factory(:server, :game_id => @game.id)
+      @game = FactoryGirl.create(:game)
+      @server = FactoryGirl.create(:server, :game_id => @game.id)
     end
     
     it "should get specified game server list" do
@@ -45,9 +45,9 @@ describe "AccountsFunctions" do
   describe "user choose game server" do
     
     before(:each) do
-      @user = Factory(:account)
-      @game = Factory(:game)
-      @server = Factory(:server, :game_id => @game.id)
+      @user = FactoryGirl.create(:account)
+      @game = FactoryGirl.create(:game)
+      @server = FactoryGirl.create(:server, :game_id => @game.id)
     end
     
     it "should have the right route to choose a server" do

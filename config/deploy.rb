@@ -8,10 +8,10 @@ require 'bundler/capistrano'
 # Deploy server
 @@server = :test
 
-set :rvm_ruby_string, "1.9.3@rails321"
+set :rvm_ruby_string, "1.9.3@rails323"
 set :rvm_type, :user
 
-set :bundle_dir, '$HOME/.rvm/gems/ruby-1.9.3-p125@rails321'
+set :bundle_dir, '$HOME/.rvm/gems/ruby-1.9.3-p125@rails323'
 
 default_run_options[:pty] = true
 set :user, "gaofei"
@@ -24,7 +24,7 @@ set :rails_env, :production
 set :use_sudo, false
 set :keep_releases, 5
 
-set :repository,  "git@58.215.185.140:/git/accounts.git"
+set :repository,  "git@vm-192-168-14-216.shengyun.grandcloud.cn:/git/accounts.git"
 set :scm, :git
 set :branch, "master"
 set :scm_passphrase, "123"

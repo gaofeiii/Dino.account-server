@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SessionsController do
   
   before(:each) do
-    @account = Factory(:account)
+    @account = FactoryGirl.create(:account)
   end
   
   describe "POST create" do

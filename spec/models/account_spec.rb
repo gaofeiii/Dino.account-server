@@ -45,7 +45,7 @@ describe Account do
   describe "methods validations" do
     
     before(:each) do
-      @account = Factory(:account)
+      @account = FactoryGirl.create(:account)
     end
     
     it "should have a specified to_json method" do

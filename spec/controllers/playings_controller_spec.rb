@@ -5,9 +5,9 @@ describe PlayingsController do
   describe "POST 'create'" do
     
     before(:each) do
-      @user = Factory(:account)
-      @game = Factory(:game)
-      @server = Factory(:server, :game_id => @game.id)
+      @user = FactoryGirl.create(:account)
+      @game = FactoryGirl.create(:game)
+      @server = FactoryGirl.create(:server, :game_id => @game.id)
     end
     
     it "should create playing relationship" do
