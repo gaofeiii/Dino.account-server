@@ -8,10 +8,6 @@ describe Account do
       @attr = { :username => "gaofei", :email => "gaofei@email.com", :password => "haha123", :password_confirmation => "haha123" }
     end
     
-    it "should not be valid when email is blank" do
-      Account.new(@attr.merge(:email => "")).should_not be_valid
-    end
-    
     it "should not be valid when email is invalid" do
       Account.new(@attr.merge(:email => "bademail")).should_not be_valid
     end

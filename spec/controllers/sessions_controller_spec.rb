@@ -8,16 +8,21 @@ describe SessionsController do
   
   describe "POST create" do
 
-    it "should be login successfully with username" do
+    it "should login successfully with username" do
       post :create, :username => @account.username, :password => @account.password
       response.should be_success
-      response.body.should include(@account.id.to_s)
     end
 
-    it "should be login successfully with email" do
+    it "should login successfully with email" do
       post :create, { :email => @account.email, :password => @account.password }
       response.should be_success
-      response.body.should include(@account.id.to_s)
+    end
+
+    it "should register game server successfully when login" do
+      controller.stub(:register_game_server).and_return(true)
+      server = FactoryGirl.create(:server)
+      post :create, :username => @account.username, :password => @account.password, :server_id => server.id
+      response.should be_success      
     end
     
     it "should reject when given wrong password" do
