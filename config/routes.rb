@@ -6,8 +6,13 @@ Accounts::Application.routes.draw do
   resources :accounts, :only => :create
   match '/signup' => 'accounts#create', :via => :post
   
-  resources :sessions, :only => [:create, :destroy]
-  match '/signin' => 'sessions#create'
+  resources :sessions, :only => [:create, :destroy] do
+    collection do
+      post 'trying'
+    end
+  end
+  match '/signin' => 'sessions#create', :via => :post
+  match '/tring'  => 'sessions#trying', :via => :post
   
   resources :servers, :only => [:index]
   match '/server_list' => 'servers#index'

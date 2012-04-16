@@ -3,8 +3,12 @@ class Server < ActiveRecord::Base
   
   class << self
 
-  	def list
-  		Server.all
+  	def list(options = nil)
+  		if options
+        Server.all
+      else
+        Server.where(:name => options[:name])   
+      end
   	end
   	
   end
