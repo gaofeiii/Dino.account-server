@@ -15,6 +15,10 @@ describe Account do
     it "should be valid when email is nil" do
       Account.new(@attr.merge(:email => nil)).should be_valid
     end
+
+    it "should be valid when email is blank" do
+      Account.new(@attr.merge(:email => "")).should be_valid
+    end
     
     it "should not be valid when email is used" do
       Account.create @attr
