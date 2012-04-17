@@ -28,11 +28,36 @@ class SessionsController < ApplicationController
     end
   end
 
+  # 试玩请求controller
+  # 默认一个设备只能有一个试玩账号
+  
   def trying
-    
+    # TODO: 需要一个标识设备的唯一ID来完成以下功能
+    # 判断该设备是否已经存在试玩账号，如果有，返回该账号
+    # 如果没有，创建一个新的试玩账号
+    # 
+    # account = Account.find_by_device_id_and_account_type(device_id, TRIAL_ACCOUNT_TYPE)
+    #
+    # For now, set account = nil
+    account = nil
+    unless account
+      account = Account.new :account_type => TRIAL_ACCOUNT_TYPE
+      until account.save
+        username = "Guest#{String.sample(2).upcase}#{rand(10000000)}"
+        account.username = username
+        account.password = username + "pass"
+        account.password_confirmation = username + "pass"
+      end
+    end
+
+    create_session(account, request.env['HTTP_UUID'])
+    render :json => {:username => account.username, :password => account.password,
+      :session_key => account.session_key, :servers => Server.list(:name => "Dinosaour")}
   end
   
   def destroy
     
   end
+
+
 end

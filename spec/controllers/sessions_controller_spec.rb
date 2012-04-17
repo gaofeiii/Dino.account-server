@@ -33,4 +33,15 @@ describe SessionsController do
       response.should_not be_success
     end
   end
+
+  describe "GET trying" do
+    
+    it "should trying successfully" do
+      lambda do
+        get :trying
+        response.should be_success
+        response.body.should include("username")
+      end.should change(Account, :count).by(1)
+    end
+  end
 end

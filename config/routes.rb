@@ -8,11 +8,11 @@ Accounts::Application.routes.draw do
   
   resources :sessions, :only => [:create, :destroy] do
     collection do
-      post 'trying'
+      get 'trying'
     end
   end
   match '/signin' => 'sessions#create', :via => :post
-  match '/tring'  => 'sessions#trying', :via => :post
+  match '/try_playing'  => 'sessions#trying', :via => :get
   
   resources :servers, :only => [:index]
   match '/server_list' => 'servers#index'
