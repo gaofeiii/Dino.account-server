@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416162919) do
+ActiveRecord::Schema.define(:version => 20120417145437) do
 
   create_table "accounts", :force => true do |t|
     t.string   "password_digest"
@@ -82,11 +82,12 @@ ActiveRecord::Schema.define(:version => 20120416162919) do
 
   create_table "servers", :force => true do |t|
     t.string   "name"
-    t.string   "address"
     t.string   "locale"
     t.integer  "game_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "ip"
+    t.integer  "port"
   end
 
   add_index "servers", ["game_id"], :name => "index_servers_on_game_id"

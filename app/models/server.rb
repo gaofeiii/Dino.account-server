@@ -15,7 +15,7 @@ class Server < ActiveRecord::Base
 
 
   def as_json(option = nil)
-    self.attributes.slice("id", "name", "address", "locale")
+    self.attributes.slice("id", "name", "ip", "port", "locale")
   end
 
 end
