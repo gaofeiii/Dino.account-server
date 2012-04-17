@@ -18,7 +18,7 @@ Accounts::Application.routes.draw do
   match '/server_list' => 'servers#index'
   
   resources :playings, :only => :create
-  match '/choose_server' => 'playings#create'
+  match '/choose_server' => 'playings#create', :via => :post
 
     # The priority is based upon order of creation:
   # first created -> highest priority.

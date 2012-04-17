@@ -12,6 +12,7 @@ describe "AccountsFunctions" do
       lambda do
         post '/signup', @attr
         response.should be_success
+        response.body.should include("session_key")
       end.should change(Account, :count).by(1)
     end
   end
@@ -25,6 +26,7 @@ describe "AccountsFunctions" do
     it "should singin success" do
       post '/signin', { :email => @account.email, :password => @account.password }
       response.should be_success
+      response.body.should include("session_key")
     end
   end
   
@@ -51,7 +53,8 @@ describe "AccountsFunctions" do
     end
     
     it "should have the right route to choose a server" do
-      post_via_redirect('/choose_server', {:game_id => @game.id, :server_id => @server.id}, {"account_id" => @user.id})
+      controller.stub(:register_game_server).and_return(true)
+      post_via_redirect('/choose_server', {:account_id => @user.id, :game_id => @game.id, :server_id => @server.id}, {"account_id" => @user.id})
       response.should be_success
       @user.should be_playing(@game)
     end

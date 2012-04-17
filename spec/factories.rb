@@ -13,7 +13,8 @@ FactoryGirl.define do
 
   factory :server do
     name                     "OMG"
-    address                  "http://localhost:3000"
+    ip                       "http://localhost" 
+    port                     3000
     locale                   "cn"
     game_id                  1
   end
@@ -22,8 +23,8 @@ FactoryGirl.define do
     "Test Server #{n}"
   end
 
-  sequence :address do |n|
-    "http://localhost:300#{n}"
+  sequence :port do |n|
+    "300#{n}"
   end
 
 end

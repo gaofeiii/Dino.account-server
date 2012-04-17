@@ -7,8 +7,8 @@ describe ServersController do
     before(:each) do
       @game = FactoryGirl.create(:game)
       @server1 = FactoryGirl.create(:server, :game_id => @game.id)
-      @server2 = FactoryGirl.create(:server, :game_id => @game.id, :name => FactoryGirl.generate(:server_name), :address => FactoryGirl.generate(:address))
-      @server3 = FactoryGirl.create(:server, :game_id => @game.id, :name => FactoryGirl.generate(:server_name), :address => FactoryGirl.generate(:address))
+      @server2 = FactoryGirl.create(:server, :game_id => @game.id, :name => FactoryGirl.generate(:server_name), :port => FactoryGirl.generate(:port))
+      @server3 = FactoryGirl.create(:server, :game_id => @game.id, :name => FactoryGirl.generate(:server_name), :port => FactoryGirl.generate(:port))
     end
     
     it "should return success" do

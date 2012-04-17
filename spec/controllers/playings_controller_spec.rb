@@ -8,12 +8,12 @@ describe PlayingsController do
       @user = FactoryGirl.create(:account)
       @game = FactoryGirl.create(:game)
       @server = FactoryGirl.create(:server, :game_id => @game.id)
+      controller.stub(:register_game_server).and_return(true)
     end
     
     it "should create playing relationship" do
       lambda do
-        @request.env["account_id"] = @user.id
-        post :create, :game_id => @game.id, :server_id => @server.id
+        post :create, :account_id => @user.id, :game_id => @game.id, :server_id => @server.id
         response.should be_success
       end.should change(Playing, :count).by(1)
       @user.should be_playing(@game)
