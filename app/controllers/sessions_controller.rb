@@ -19,8 +19,6 @@ class SessionsController < ApplicationController
       else
         render :json => {:session_key => account.session_key, :servers => Server.list(:name => "Dinosaour")}
       end
-
-
     else
       render :json => {:errors => ["email/password doesn't match"]}, :status => 999
     end

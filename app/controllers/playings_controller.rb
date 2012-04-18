@@ -18,8 +18,10 @@ class PlayingsController < ApplicationController
   	end
 
   	unless account.playing?(game)
-  		playing = account.playings.create :game_id => game.id, :server_id => params[:server_id]
+  		playing = account.playings.new :game_id => game.id, :server_id => params[:server_id]
+      render playing.errors and return unless playing.save
   	end
+
   	register_game_server(params[:server_id], account)
   	render :json => "OK"
 

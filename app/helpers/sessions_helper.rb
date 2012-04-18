@@ -11,9 +11,8 @@ module SessionsHelper
 		server = Server.find_by_id(server_id)
 		if server
 			# post account to server
-			uri = URI(server.address + '/login')
-			res = Net::HTTP.post_form(uri, 'account_id' => account.id, 'session_key' => account.session_key)
-			
+			uri = URI(server.address + '/sessions')
+			res = Net::HTTP.post_form(uri, 'account_id' => account.id, 'session_key' => account.session_key)	
 			return true if res.code == "200"
 		else
 			false		
