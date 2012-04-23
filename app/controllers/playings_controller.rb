@@ -22,8 +22,8 @@ class PlayingsController < ApplicationController
       render playing.errors and return unless playing.save
   	end
 
-  	register_game_server(params[:server_id], account)
-  	render :json => "OK"
+  	result = register_game_server(params[:server_id], account)
+  	render :json => result
 
 
     # playing = @account.playings.build :game_id => params[:game_id], :server_id => params[:server_id]

@@ -13,7 +13,7 @@ module SessionsHelper
 			# post account to server
 			uri = URI(server.address + '/sessions')
 			res = Net::HTTP.post_form(uri, 'account_id' => account.id, 'session_key' => account.session_key)	
-			return true if res.code == "200"
+			return JSON.parse(res.body).symbolize_keys if res.code == "200"
 		else
 			false		
 		end

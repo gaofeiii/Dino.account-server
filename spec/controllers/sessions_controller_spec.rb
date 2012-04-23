@@ -21,7 +21,7 @@ describe SessionsController do
     end
 
     it "should register game server successfully when login" do
-      controller.stub(:register_game_server).and_return(true)
+      controller.stub(:register_game_server).and_return({:player_id => 1})
       server = FactoryGirl.create(:server)
       post :create, :username => @account.username, :password => @account.password, :server_id => server.id
       response.should be_success

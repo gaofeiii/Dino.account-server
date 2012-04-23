@@ -14,8 +14,8 @@ class SessionsController < ApplicationController
       create_session(account, request.env['HTTP_UUID'])
       server_id = params[:server_id]
 
-      if server_id && register_game_server(server_id, account)
-        render :json => {:session_key => account.session_key} and return
+      if server_id && result = register_game_server(server_id, account)
+        render :json => {:player_id => result[:player_id], :session_key => account.session_key} and return
       else
         render :json => {:session_key => account.session_key, :servers => Server.list(:name => "Dinosaour")}
       end
