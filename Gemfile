@@ -6,7 +6,6 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
 gem 'bcrypt-ruby'
 gem 'erubis'
 gem "formtastic", "~> 2.1.1"
@@ -16,6 +15,10 @@ gem 'therubyracer'
 gem 'sass-rails','~> 3.2.3'
 gem "meta_search",    '>= 1.1.0.pre'
 gem 'unicorn'
+
+group :production do
+  gem 'mysql2'
+end
 
 
 group :development do
