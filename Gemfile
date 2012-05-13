@@ -7,7 +7,6 @@ gem 'rails', '3.2.3'
 
 gem 'sqlite3'
 gem 'mysql2'
-gem 'unicorn'
 gem 'bcrypt-ruby'
 gem 'erubis'
 gem "formtastic", "~> 2.1.1"
@@ -16,13 +15,18 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'sass-rails','~> 3.2.3'
 gem "meta_search",    '>= 1.1.0.pre'
+gem 'unicorn'
+
 
 group :development do
   gem 'rspec-rails', '2.8.1'
-  gem 'capistrano', '2.11.2'
   gem 'guard'
   gem 'ruby_gntp'
   gem 'hirb'
+
+  # The gems below are for deployment, make sure the rvm version is >= 1.11.3
+  gem 'capistrano'
+  gem 'rvm-capistrano'
 end
 
 group :test do

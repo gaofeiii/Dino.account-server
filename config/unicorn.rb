@@ -2,7 +2,7 @@ worker_processes 1
 
 working_directory "/var/games/servers/accounts/current"
 
-listen "/tmp/accounts.sock", :backlog => 128
+listen "/tmp/dinosaur_accounts.sock", :backlog => 128
 
 preload_app true
 timeout 30

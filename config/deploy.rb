@@ -1,17 +1,18 @@
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
-require "rvm/capistrano"
+# $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+
 require 'bundler/capistrano'
 
 # Server list
-@test = "vm-192-168-14-216.shengyun.grandcloud.cn"
+@test = "106.187.90.19"
 
 # Deploy server
 @@server = :test
 
-set :rvm_ruby_string, "1.9.3@rails323"
+set :rvm_ruby_string, "1.9.3@accounts"
 set :rvm_type, :user
+require "rvm/capistrano"
 
-set :bundle_dir, '$HOME/.rvm/gems/ruby-1.9.3-p125@rails323'
+set :bundle_dir, '$HOME/.rvm/gems/ruby-1.9.3@accounts'
 
 default_run_options[:pty] = true
 set :user, "gaofei"
@@ -33,15 +34,14 @@ role :web, eval("@#{@@server}")
 role :app, eval("@#{@@server}")
 role :db,  eval("@#{@@server}"), :primary => true # This is where Rails migrations will run
 
-namespace :deploy do
-  %w(start stop restart).each do |action|
-    desc "unicorn:#{action}"
-    task action.to_sym do
-      find_and_execute_task("unicorn:#{action}")
-    end
-  end
- 
-end
+# namespace :deploy do
+#   %w(start stop restart).each do |action|
+#     desc "unicorn:#{action}"
+#     task action.to_sym do
+#       find_and_execute_task("unicorn:#{action}")
+#     end
+#   end
+# end
 
 namespace :assets do
   desc "assets:precompile"
