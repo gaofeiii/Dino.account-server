@@ -1,11 +1,11 @@
 source 'http://ruby.taobao.org'
+source :rubygems
 
 gem 'rails', '3.2.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'mysql2'
 gem 'bcrypt-ruby'
 gem 'erubis'
@@ -19,6 +19,7 @@ gem 'unicorn'
 
 
 group :development do
+  gem 'sqlite3'
   gem 'rspec-rails', '2.8.1'
   gem 'guard'
   gem 'ruby_gntp'
@@ -30,6 +31,7 @@ group :development do
 end
 
 group :test do
+  gem 'sqlite3'
   gem 'rspec-rails', '2.8.1'
   gem 'factory_girl_rails'
   gem 'simplecov'
