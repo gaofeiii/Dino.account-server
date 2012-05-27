@@ -4,13 +4,14 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 Accounts::Application.initialize!
 
-const_dir = "#{Rails.root}/config/const"
+
+const_dir = "#{Rails.root}/const"
 Dir[const_dir + '/*.rb', const_dir + '/**/*.rb'].each{|file| require file}
 
 class String
-	def self.sample(n = 10)
+	def self.sample(n = 1)
 		str = ""
-		all_words = ('a'..'z').to_a + ('A'..'Z').to_a
+		all_words = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
 		n.times{str += all_words.sample}
 		str
 	end
