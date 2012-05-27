@@ -12,7 +12,6 @@ describe AccountsController do
       lambda do
         post :create, @attr
         response.should be_success
-
       end.should change(Account, :count).by(1)
     end
 

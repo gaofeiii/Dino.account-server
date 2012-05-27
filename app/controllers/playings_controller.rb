@@ -6,7 +6,6 @@ class PlayingsController < ApplicationController
   	# 查询该玩家在指定服务器是否有账号
   	# 如果有，向该服务器发送登陆请求，如果登陆成功则返回OK
   	# 如果没有，创建一条记录再发送登陆请求，返回OK
-
   	account = Account.find_by_id(params[:account_id])
   	unless account
   		render :json => {:error => "Account not exist"}, :status => 999 and return

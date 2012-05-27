@@ -11,13 +11,13 @@ describe SessionsController do
     it "should login successfully with username" do
       post :create, :username => @account.username, :password => @account.password
       response.should be_success
-      response.body.should include("servers")
+      response.body.should include({:success => true}.to_json)
     end
 
     it "should login successfully with email" do
       post :create, { :email => @account.email, :password => @account.password }
       response.should be_success
-      response.body.should include("servers")
+      response.body.should include({:success => true}.to_json)
     end
 
     it "should register game server successfully when login" do
@@ -25,7 +25,7 @@ describe SessionsController do
       server = FactoryGirl.create(:server)
       post :create, :username => @account.username, :password => @account.password, :server_id => server.id
       response.should be_success
-      response.body.should include("session_key")
+      response.body.should include({:success => true}.to_json)
     end
     
     it "should reject when given wrong password" do

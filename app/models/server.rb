@@ -18,7 +18,8 @@ class Server < ActiveRecord::Base
   end
 
   def as_json(option = nil)
-    self.attributes.slice("id", "name", "ip", "port", "locale")
+    hash = self.attributes.slice("id", "name", "ip", "port", "locale")
+    hash.merge(:game => game.name)
   end
 
 end

@@ -12,7 +12,7 @@ describe "AccountsFunctions" do
       lambda do
         post '/signup', @attr
         response.should be_success
-        response.body.should include("session_key")
+        response.body.should include({:success => true}.to_json)
       end.should change(Account, :count).by(1)
     end
   end
@@ -26,7 +26,7 @@ describe "AccountsFunctions" do
     it "should singin success" do
       post '/signin', { :email => @account.email, :password => @account.password }
       response.should be_success
-      response.body.should include("session_key")
+      response.body.should include({:success => true}.to_json)
     end
   end
   
