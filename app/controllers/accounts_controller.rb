@@ -1,6 +1,7 @@
 include SessionsHelper
 
 class AccountsController < ApplicationController
+  before_filter :verify_signature, :only => [:create]
   
   def create
     account = Account.new params.slice(:username, :email, :password, :password_confirmation)

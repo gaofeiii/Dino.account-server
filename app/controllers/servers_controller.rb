@@ -1,4 +1,5 @@
 class ServersController < ApplicationController
+	before_filter :verify_signature, :only => [:index]
   
   def index
   	render :json => Server.all and return if params[:game_name].nil?

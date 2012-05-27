@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
  	 
-  before_filter :verify_signature
+  # before_filter :verify_signature
 
   def verify_signature
   	return unless Rails.env.production?

@@ -1,6 +1,7 @@
 include SessionsHelper
 
 class SessionsController < ApplicationController
+  before_filter :verify_signature, :only => [:create, :trying]
   
   def create
     # account = Account.find_by_username(params[:username]) || Account.find_by_email(params[:email])
