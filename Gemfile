@@ -1,5 +1,5 @@
 source 'http://ruby.taobao.org'
-source :rubygems
+# source :rubygems
 
 gem 'rails', '3.2.3'
 
@@ -23,7 +23,7 @@ end
 
 group :development do
   gem 'sqlite3'
-  gem 'rspec-rails', '2.8.1'
+  gem 'rspec-rails', '~> 2.0'
   gem 'guard'
   gem 'ruby_gntp'
   gem 'hirb'
@@ -35,7 +35,6 @@ end
 
 group :test do
   gem 'sqlite3'
-  gem 'rspec-rails', '2.8.1'
   gem 'factory_girl_rails'
   gem 'simplecov'
 end

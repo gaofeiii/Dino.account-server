@@ -42,6 +42,24 @@ role :db,  eval("@#{@@server}"), :primary => true # This is where Rails migratio
 #   end
 # end
 
+namespace :nginx do
+  desc "Copy nginx config file to aim directory"
+  task :config do
+    run "sudo cp #{current_path}/config/nginx/dinosaur-account.conf /etc/nginx/conf.d/"
+  end
+
+  desc "Reload nginx"
+  task :reload do
+    run "sudo nginx -s reload"
+  end
+
+  desc "Restart nginx by new config file"
+  task :restart do
+    find_and_execute_task("nginx:config")
+    find_and_execute_task("nginx:reload")
+  end
+end
+
 namespace :assets do
   desc "assets:precompile"
   task :precompile, :role => :app do
@@ -58,7 +76,7 @@ end
 # 如果有rvmrc文件需要执行 trust_rvmrc
 # after "deploy", "rvm:trust_rvmrc"
 after "deploy", "deploy:migrate"
-# after "deploy:create_symlink", "assets:precompile"
+after "deploy", "assets:precompile"
 
 namespace :unicorn do
   desc "Start unicorn"
