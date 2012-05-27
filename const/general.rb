@@ -1,4 +1,9 @@
-LOGIN_PRIVATE_KEY 		= "5AE7F94303998039A99928A46AF8E61E2C1A64F7" # 登陆时的私钥
-	
-TRIAL_ACCOUNT_TYPE 		= 0 # 试玩账户类型
-NORMAL_ACCOUNT_TYPE 	= 1 # 普通正式用户类型
+PRIVATE_KEY = "Rgk3ExSG3N9Nqx5mW1WYCj9IdSPlm5am5FXUVD51KsNXbWnR0SdSLBkSKzsTAg5Q"
+
+# 账户的类型
+# 1: 试玩账号
+# 2: 普通张航
+ACCOUNT_TYPES = {
+	:trial => 0,
+	:normal => 1
+}

@@ -44,9 +44,9 @@ class SessionsController < ApplicationController
     # For now, set account = nil
     account = nil
     unless account
-      account = Account.new :account_type => TRIAL_ACCOUNT_TYPE
+      account = Account.new :account_type => ACCOUNT_TYPES[:trial]
       until account.save
-        username = "Guest#{String.sample(2).upcase}#{rand(10000000)}"
+        username = "Guest#{String.sample(2, :upcase)}#{rand(10000000)}"
         passwd = String.sample(8)
         account.username = username
         account.password = passwd
