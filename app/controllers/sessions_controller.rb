@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     # NOTE: 游戏内登录的接口放到游戏web server中，这里不再生成session_key
     account = Account.find_by_username(params[:username]) || Account.find_by_email(params[:email])
     if account.try(:authenticate, params[:password])
-      render :json => {:success => true}
+      render :json => {:account_id => account.id, :success => true}
     else
       render :json => {:success => false}, :status => 999
     end
