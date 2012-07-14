@@ -3,6 +3,7 @@ include SessionsHelper
 class SessionsController < ApplicationController
   before_filter :verify_signature, :only => [:create, :trying]
   
+  # 登陆
   def create
     # NOTE: 游戏内登录的接口放到游戏web server中，这里不再生成session_key
     account = Account.find_by_username(params[:username]) || Account.find_by_email(params[:email])
@@ -28,7 +29,7 @@ class SessionsController < ApplicationController
     unless account
       account = Account.new :account_type => ACCOUNT_TYPES[:trial]
       until account.save
-        username = "Guest#{String.sample(2, :upcase)}#{rand(10000000)}"
+        username = "Guest#{String.sample(2)}#{rand(10000000)}"
         passwd = String.sample(8)
         account.username = username
         account.password = passwd
