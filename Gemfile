@@ -1,7 +1,7 @@
 source 'http://ruby.taobao.org'
 # source :rubygems
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -25,6 +25,7 @@ group :development do
   gem 'sqlite3'
   gem 'rspec-rails', '~> 2.0'
   gem 'guard'
+  gem 'guard-rspec'
   gem 'ruby_gntp'
   gem 'hirb'
 
