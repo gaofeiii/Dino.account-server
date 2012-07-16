@@ -29,17 +29,15 @@ class SessionsController < ApplicationController
     unless account
       account = Account.new :account_type => ACCOUNT_TYPES[:trial]
       until account.save
-        username = "Guest#{String.sample(2)}#{rand(10000000)}"
-        passwd = String.sample(8)
+        # username = "Guest_#{String.sample(2)}#{rand(10000000)}"
+        username = "Guest_#{format("%07d", Account.count + 1)}"
+        passwd = String.sample(6)
         account.username = username
         account.password = passwd
         account.password_confirmation = passwd
       end
     end
 
-    # create_session(account, request.env['HTTP_UUID'])
-    # render :json => {:username => account.username, :password => account.password,
-    #   :session_key => account.session_key, :servers => Server.list(:name => "Dinosaour")}
     render :json => { 
                       :success => true,
                       :username => account.username, 
