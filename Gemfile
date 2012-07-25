@@ -5,7 +5,6 @@ gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'thin'
 gem 'bcrypt-ruby'
 gem 'erubis'
 gem "formtastic", "~> 2.1.1"
@@ -22,6 +21,7 @@ end
 
 
 group :development do
+  gem 'thin'
   gem 'sqlite3'
   gem 'rspec-rails', '~> 2.0'
   gem 'guard'
