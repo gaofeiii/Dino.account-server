@@ -26,7 +26,7 @@ describe "AccountsFunctions" do
     it "should singin success" do
       post '/signin', { :email => @account.email, :password => @account.password }
       response.should be_success
-      response.body.should include({:success => true}.to_json)
+      response.body.should include('success')
     end
   end
   
