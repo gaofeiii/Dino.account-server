@@ -14,6 +14,20 @@ class SessionsController < ApplicationController
     end
   end
 
+  # 注册
+  def register
+    account = Account.new params.slice(:username, :email, :password, :password_confirmation)
+    if account.save
+      # create_session(account, request.env['HTTP_UUID'])
+      render :json => {
+        :success => true, :account_id => account.id
+      }
+      # render :json => {:session_key => account.session_key, :servers => Server.list(:name => "Dinosaur")}
+    else
+      render :json => {:success => false}.merge(:errors => account.errors.messages), :status => 999
+    end
+  end
+
   # 试玩请求controller
   # 默认一个设备只能有一个试玩账号
   
@@ -39,15 +53,35 @@ class SessionsController < ApplicationController
     end
 
     render :json => { 
-                      :success => true,
-                      :username => account.username, 
-                      :password => account.password
+                      :success    => true,
+                      :account_id => account.id,
+                      :username   => account.username, 
+                      :password   => account.password
                     }
   end
-  
-  def destroy
-    
+
+  def update
+    account = Account.find_by_id(params[:account_id])
+
+    if account.nil?
+      render :json => {:success => false} and return
+    end
+
+    account.username = params[:username] if params[:username]
+    account.email = params[:email] if params[:email]
+    account.password = params[:password]
+    account.password_confirmation = params[:password_confirmation]
+
+    data = {}
+
+    if account.save
+      data = {:success => true, :account_id => account.id}
+    else
+      data = {:success => false, :errors => account.errors.messages}
+    end
+    render :json => data
   end
+
 
 
 end

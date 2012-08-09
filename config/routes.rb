@@ -3,16 +3,12 @@ Accounts::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  resources :accounts, :only => :create
-  match '/signup' => 'accounts#create', :via => :post
+  match '/signup'       => 'sessions#register',     :via => :post
+  match '/signin'       => 'sessions#create',       :via => :post
+  match '/try_playing'  => 'sessions#trying',       :via => :get
+  match '/update'       => 'sessions#update',       :via => :post
+
   
-  resources :sessions, :only => [:create, :destroy] do
-    collection do
-      get 'trying'
-    end
-  end
-  match '/signin' => 'sessions#create', :via => :post
-  match '/try_playing'  => 'sessions#trying', :via => :get
   
   resources :servers, :only => [:index]
   match '/server_list' => 'servers#index'

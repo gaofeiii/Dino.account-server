@@ -26,7 +26,8 @@ group :development do
   gem 'rspec-rails', '~> 2.0'
   gem 'guard'
   gem 'guard-rspec'
-  gem 'ruby_gntp'
+  # gem 'ruby_gntp'
+  gem 'terminal-notifier'
   gem 'hirb'
 
   # The gems below are for deployment, make sure the rvm version is >= 1.11.3
