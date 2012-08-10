@@ -1,7 +1,7 @@
 include SessionsHelper
 
 class SessionsController < ApplicationController
-  before_filter :verify_signature, :only => [:create, :trying]
+  # before_filter :verify_signature, :only => [:create, :trying]
   
   # 登陆
   def create
