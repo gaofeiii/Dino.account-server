@@ -25,7 +25,7 @@ set :rails_env, :production
 set :use_sudo, false
 set :keep_releases, 5
 
-set :repository,  "gitolite@106.187.90.19:dinosaur_account.git"
+set :repository,  "gitolite@110.76.45.28:account_server.git"
 set :scm, :git
 set :branch, "master"
 
