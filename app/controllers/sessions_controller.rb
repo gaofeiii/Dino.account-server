@@ -43,8 +43,7 @@ class SessionsController < ApplicationController
     unless account
       account = Account.new :account_type => ACCOUNT_TYPES[:trial]
       until account.save
-        # username = "Guest_#{String.sample(2)}#{rand(10000000)}"
-        username = "Guest_#{format("%s", Digest::MD5.hexdigest(Time.now.to_s + String.sample(2)))}"
+        username = "Guest_#{Digest::SHA1.hexdigest(Time.now.to_s + String.sample(2))[8..14]}"
         passwd = String.sample(6)
         account.username = username
         account.password = passwd

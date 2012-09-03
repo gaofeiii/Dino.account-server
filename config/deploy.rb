@@ -4,15 +4,16 @@ require 'bundler/capistrano'
 
 # Server list
 @linode = "106.187.90.19"
+@ali = '110.76.45.28'
 
 # Deploy server
-@@server = :linode
+@@server = :ali
 
 set :rvm_ruby_string, "1.9.3@accounts"
 set :rvm_type, :user
 require "rvm/capistrano"
 
-set :bundle_dir, '$HOME/.rvm/gems/ruby-1.9.3@dinosaur_accounts'
+set :bundle_dir, '$HOME/.rvm/gems/ruby-1.9.3@accounts'
 
 default_run_options[:pty] = true
 set :user, "gaofei"
