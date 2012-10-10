@@ -11,14 +11,14 @@ class Notification
 			ctx = OpenSSL::SSL::SSLContext.new
 			ctx.key = OpenSSL::PKey::RSA.new(cert_file, PASSPHRASE)
 			ctx.cert = OpenSSL::X509::Certificate.new(cert_file)
-			s = TCPSocket.new(HOST, PORT)
-			$ssl = OpenSSL::SSL::SSLSocket.new(s, ctx)
+			$s = TCPSocket.new(HOST, PORT)
+			$ssl = OpenSSL::SSL::SSLSocket.new($s, ctx)
 			$ssl.sync = true
 			$ssl.connect
 		end
 
 		def send(device_token, message)
-			if $ssl.nil?
+			if $ssl.nil? or $s.nil?
 				self.connect_apn
 			end
 
