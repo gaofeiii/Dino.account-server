@@ -7,7 +7,9 @@ Dir[const_dir + '/*.rb', const_dir + '/**/*.rb'].each{|file| require file}
 # Initialize the rails application
 Accounts::Application.initialize!
 
-Notification.connect_apn
+unless Rails.env.test?
+	Notification.connect_apn	
+end
 
 module StringExtensions
 	CHARACTORS = ('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a
