@@ -1,0 +1,67 @@
+# encoding: utf-8
+class Notification
+	HOST = "gateway.sandbox.push.apple.com"
+  PORT = 2195
+  PASSPHRASE = '123'
+  CERT_FILE_PATH = Rails.root.join("const").join("apns-dev.pem")
+
+  class << self
+  	def connect_apn
+			cert_file = File.read(CERT_FILE_PATH)
+			ctx = OpenSSL::SSL::SSLContext.new
+			ctx.key = OpenSSL::PKey::RSA.new(cert_file, PASSPHRASE)
+			ctx.cert = OpenSSL::X509::Certificate.new(cert_file)
+			s = TCPSocket.new(HOST, PORT)
+			$ssl = OpenSSL::SSL::SSLSocket.new(s, ctx)
+			$ssl.sync = true
+			$ssl.connect
+		end
+
+		def send(device_token, message)
+			if $ssl.nil?
+				self.connect_apn
+			end
+
+			message = push_message(device_token, message)
+
+			begin
+				$ssl.write(message)
+				if IO.select([$ssl], nil, nil, 0.0001)
+
+          read_buffer = $ssl.read(6)
+
+          p "------ ", read_buffer
+
+          logger.info "!!!!! PUSHING ERROR !!!!! -- " + read_buffer[1].to_s
+        end
+        return true
+      rescue Exception => e
+      	p "----- error ---- "
+        p e.to_s
+        return false
+			end
+
+		end
+
+		def push_message(device_token, message)
+			hex = [device_token.delete(' ')].pack('H*')
+			json_message = apple_hash_json(message)
+			length = json_message.length
+	    high = (length >> 8) & 255
+	    low  = length & 255
+			"\0\0\040#{hex}#{high.chr}#{low.chr}#{json_message}"
+		end
+
+		def apple_hash_json(msg = "Welcome to Dinosaur")
+	    result = {}
+	    result['aps'] = {}
+	    result['aps']['badge'] = 0
+	    result['aps']['sound'] = 'bingbong.aiff'
+	    result['aps']['alert'] = msg
+	    result.to_json
+	  end
+
+  end
+
+	
+end
