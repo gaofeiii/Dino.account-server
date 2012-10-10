@@ -32,7 +32,7 @@ class Notification
 
           p "------ ", read_buffer
 
-          logger.info "!!!!! PUSHING ERROR !!!!! -- " + read_buffer[1].to_s
+          p "!!!!! PUSHING ERROR !!!!! -- " + read_buffer[1].to_s
         end
         return true
       rescue Exception => e

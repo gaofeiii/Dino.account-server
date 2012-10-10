@@ -16,6 +16,9 @@ Accounts::Application.routes.draw do
   resources :playings, :only => :create
   match '/choose_server' => 'playings#create', :via => :post
 
+
+  match 'send_apn' => 'notification#send_apple_remote_notification', :via => :post
+
     # The priority is based upon order of creation:
   # first created -> highest priority.
 
