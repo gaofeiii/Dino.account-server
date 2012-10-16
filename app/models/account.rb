@@ -6,6 +6,8 @@ class Account < ActiveRecord::Base
   # TODO: 完成用户名的正则表达式
   # name_reg = /
   has_secure_password
+
+  before_save :init_email
   
   validates :email, :allow_blank => true,
                     :format => email_reg,
@@ -29,6 +31,10 @@ class Account < ActiveRecord::Base
 
   def as_json(args = nil)
     self.attributes.slice("id", "email")
+  end
+
+  def init_email
+    self.email = nil if email.blank?
   end
 
 end
