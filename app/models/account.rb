@@ -29,6 +29,14 @@ class Account < ActiveRecord::Base
     self.playings.map(&:game_id).include?(game.id)
   end
 
+  def try_playing(server_id)
+    my_playings = playings
+    if my_playings.where(:server_id => server_id).blank?
+      server = Server.find_by_id(server_id)
+      my_playings.create(:server_id => server.id, :game_id => server.game_id)
+    end
+  end
+
   def as_json(args = nil)
     self.attributes.slice("id", "email")
   end

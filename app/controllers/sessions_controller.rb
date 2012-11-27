@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     # NOTE: 游戏内登录的接口放到游戏web server中，这里不再生成session_key
     account = Account.find_by_username(params[:username]) || Account.find_by_email(params[:email])
     if account.try(:authenticate, params[:password])
+      account.try_playing(params[:server_id])
       render :json => {:account_id => account.id, :success => true}
     else
       render :json => {:success => false}, :status => 999
@@ -18,7 +19,7 @@ class SessionsController < ApplicationController
   def register
     account = Account.new params.slice(:username, :email, :password, :password_confirmation)
     if account.save
-      # create_session(account, request.env['HTTP_UUID'])
+      account.try_playing(params[:server_id])
       render :json => {
         :success => true, :account_id => account.id
       }
@@ -49,6 +50,7 @@ class SessionsController < ApplicationController
         account.password = passwd
         account.password_confirmation = passwd
       end
+      account.try_playing(params[:server_id])
     end
 
     render :json => { 

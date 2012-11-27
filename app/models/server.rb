@@ -10,7 +10,6 @@ class Server < ActiveRecord::Base
         Server.where(:name => options[:name])   
       end
   	end
-  	
   end
 
   def address
@@ -19,7 +18,6 @@ class Server < ActiveRecord::Base
 
   def as_json(option = nil)
     hash = self.attributes.slice('id', "name", "ip", "port")
-    # hash.merge(:game => game.name)
   end
 
 end

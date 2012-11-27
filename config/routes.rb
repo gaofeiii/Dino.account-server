@@ -5,7 +5,7 @@ Accounts::Application.routes.draw do
 
   match '/signup'       => 'sessions#register',     :via => :post
   match '/signin'       => 'sessions#create',       :via => :post
-  match '/try_playing'  => 'sessions#trying',       :via => :get
+  match '/try_playing'  => 'sessions#trying',       :via => [:get, :post]
   match '/update'       => 'sessions#update',       :via => :post
 
   
