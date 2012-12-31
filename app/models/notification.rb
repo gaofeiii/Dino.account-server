@@ -3,7 +3,7 @@ class Notification
 	HOST = "gateway.sandbox.push.apple.com"
   PORT = 2195
   PASSPHRASE = '123'
-  CERT_FILE_PATH = Rails.root.join("const").join("apns-dev.pem")
+  CERT_FILE_PATH = Rails.root.join("const").join("aps-development.pem")
 
   class << self
   	def connect_apn
