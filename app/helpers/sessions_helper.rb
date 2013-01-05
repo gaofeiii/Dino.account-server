@@ -1,5 +1,9 @@
 module SessionsHelper
 
+	def hexed_username(ori_name, passwd = "")
+		new_name = "#{ori_name}_#{Digest::MD5.hexdigest(ori_name + "--" + passwd + USERNAME_SALT)}"
+	end
+
 	# def create_session(account, uuid)
 	# 	s_key = Digest::SHA2.hexdigest(account.username + account.email.to_s + uuid.to_s + Time.now.to_s + LOGIN_PRIVATE_KEY)
 	# 	account.update_attributes :session_key => s_key, :session_expired_at => Time.now + 1.day

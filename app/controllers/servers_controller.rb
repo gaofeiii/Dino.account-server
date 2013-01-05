@@ -1,5 +1,5 @@
 class ServersController < ApplicationController
-	before_filter :verify_signature, :only => [:index]
+	skip_filter :verify_signature, :only => [:index]
   
   def index
   	if params[:game_name].blank?

@@ -1,23 +1,31 @@
 include SessionsHelper
 
 class SessionsController < ApplicationController
-  # before_filter :verify_signature, :only => [:create, :trying]
+  before_filter :verify_signature#, :only => [:create, :trying, :update, :change_password]
   
   # 登陆
   def create
-    # NOTE: 游戏内登录的接口放到游戏web server中，这里不再生成session_key
-    account = Account.find_by_username(params[:username]) || Account.find_by_email(params[:email])
-    if account.try(:authenticate, params[:password])
-      account.try_playing(params[:server_id])
+    # account = Account.find_by_username(params[:username]) || Account.find_by_email(params[:email])
+    # if account.try(:authenticate, params[:password])
+    #   account.try_playing(params[:server_id])
+    #   render :json => {:account_id => account.id, :success => true}
+    # else
+    #   render :json => {:success => false}, :status => 999
+    # end
+    p "==username: #{params[:username]} || ==password: #{params[:password]}"
+    account = Account.authenticate_username_and_password(params[:username], params[:password])
+
+    if account
       render :json => {:account_id => account.id, :success => true}
     else
-      render :json => {:success => false}, :status => 999
+      render :json => {:success => false, :error => "Invalid username & password"}, :status => 999
     end
   end
 
   # 注册
   def register
     account = Account.new params.slice(:username, :email, :password, :password_confirmation)
+    account.username = hexed_username(account.username)
     if account.save
       account.try_playing(params[:server_id])
       render :json => {
@@ -46,7 +54,7 @@ class SessionsController < ApplicationController
       until account.save
         username = "Guest_#{Digest::SHA1.hexdigest(Time.now.to_s + String.sample(2))[8..14]}"
         passwd = String.sample(6)
-        account.username = username
+        account.username = hexed_username(username, passwd)
         account.password = passwd
         account.password_confirmation = passwd
       end
@@ -56,7 +64,7 @@ class SessionsController < ApplicationController
     render :json => { 
                       :success    => true,
                       :account_id => account.id,
-                      :username   => account.username, 
+                      :username   => username, 
                       :password   => account.password
                     }
   end
@@ -68,7 +76,7 @@ class SessionsController < ApplicationController
       render :json => {:success => false} and return
     end
 
-    account.username = params[:username] if params[:username]
+    account.username = hexed_username(params[:username], params[:password]) if params[:username]
     account.email = params[:email] if params[:email]
     account.password = params[:password]
     account.password_confirmation = params[:password_confirmation]
@@ -81,6 +89,33 @@ class SessionsController < ApplicationController
       data = {:success => false, :errors => account.errors.messages}
     end
     render :json => data
+  end
+
+  def change_password
+    ori_name = params[:username]
+    hex_name = hexed_username(ori_name, params[:old_pass])
+
+    account = Account.find_by_username(hex_name)
+    if account.nil?
+      render :json => {
+        :success => false, :error => "Invalid username"
+      }
+      return
+    end
+
+    account.password = params[:new_pass]
+    # account.password_confirmation = params[:new_pass]
+    account.username = hexed_username(ori_name, account.password)
+
+    if account.save
+      render :json => {
+        :success => true, :message => params[:password]
+      }
+    else
+      render :json => {
+        :success => false, :error => "Invalid password"
+      }
+    end
   end
 
 

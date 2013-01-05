@@ -3,11 +3,15 @@ Accounts::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  match '/signup'       => 'sessions#register',     :via => :post
-  match '/signin'       => 'sessions#create',       :via => :post
-  match '/try_playing'  => 'sessions#trying',       :via => [:get, :post]
-  match '/update'       => 'sessions#update',       :via => :post
+  match '/signup'       => 'sessions#register',         :via => :post
+  match '/signin'       => 'sessions#create',           :via => :post
+  match '/try_playing'  => 'sessions#trying',           :via => [:get, :post]
+  match '/update'       => 'sessions#update',           :via => :post
+  match '/change_pass'  => 'sessions#change_password',  :via => :post
 
+  scope :path => 'accounts', :as => 'accounts' do
+    
+  end
   
   
   resources :servers, :only => [:index]

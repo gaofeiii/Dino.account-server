@@ -1,5 +1,7 @@
-class Account < ActiveRecord::Base
+include SessionsHelper
 
+class Account < ActiveRecord::Base
+  
   has_many :playings, :foreign_key => :account_id, :dependent => :destroy
 
   email_reg = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -19,6 +21,21 @@ class Account < ActiveRecord::Base
 
   def logined?
     
+  end
+
+  def self.authenticate_username_and_password(name, pass)
+    urname = hexed_username(name, pass)
+    account = self.find_by_username(urname)
+    if account.try(:authenticate, pass)
+      return account
+    else
+      return false
+    end
+  end
+
+  def self.find_by_ori_name(name)
+    urname = hexed_username(name)
+    self.find_by_username(urname)
   end
 
   def self.find_by_username_or_email(name_or_email)
