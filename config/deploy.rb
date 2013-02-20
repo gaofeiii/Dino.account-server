@@ -4,10 +4,10 @@ require 'bundler/capistrano'
 
 # Server list
 @linode = "106.187.91.156"
-@ali = '110.76.45.28'
+@a001 = "50.112.84.136"
 
 # Deploy server
-@@server = :linode
+@servers = [@a001]
 
 set :rvm_ruby_string, "1.9.3@accounts"
 set :rvm_type, :user
@@ -30,9 +30,15 @@ set :repository,  "gitolite@106.187.91.156:account_server.git"
 set :scm, :git
 set :branch, "master"
 
-role :web, eval("@#{@@server}")
-role :app, eval("@#{@@server}")
-role :db,  eval("@#{@@server}"), :primary => true # This is where Rails migrations will run
+# @servers.each do |svr|
+#   role :web, svr
+#   role :app, svr
+#   role :db, svr, :primary => true
+# end
+
+role :web, *@servers
+role :app, *@servers
+role :db,  *@servers, :primary => true # This is where Rails migrations will run
 
 # namespace :deploy do
 #   %w(start stop restart).each do |action|
