@@ -46,10 +46,10 @@ class Account < ActiveRecord::Base
     self.playings.map(&:game_id).include?(game.id)
   end
 
-  def try_playing(server_id)
+  def try_playing(server_ip)
     my_playings = playings
-    if my_playings.where(:server_id => server_id).blank?
-      server = Server.find_by_id(server_id)
+    server = Server.find_by_ip(server_ip)
+    if my_playings.where(:server_id => server.id).blank?
       my_playings.create(:server_id => server.id, :game_id => server.game_id)
     end
   end

@@ -1,4 +1,4 @@
-worker_processes 1
+worker_processes 4
 
 working_directory "/var/games/servers/accounts/current"
 

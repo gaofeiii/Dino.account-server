@@ -58,7 +58,7 @@ class SessionsController < ApplicationController
         account.password = passwd
         account.password_confirmation = passwd
       end
-      account.try_playing(params[:server_id])
+      account.try_playing(params[:server_ip])
     end
 
     render :json => { 
