@@ -7,7 +7,7 @@ require 'bundler/capistrano'
 @a001 = "50.112.84.136"
 
 # Deploy server
-@servers = [@a001]
+@servers = [@linode]
 
 set :rvm_ruby_string, "1.9.3@accounts"
 set :rvm_type, :user
