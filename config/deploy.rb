@@ -7,9 +7,9 @@ require 'bundler/capistrano'
 @a001 = "50.112.84.136"
 
 # Deploy server
-@servers = [@linode]
+@servers = [@a001]
 
-set :rvm_ruby_string, "1.9.3@accounts"
+set :rvm_ruby_string, "2.0.0@accounts"
 set :rvm_type, :user
 require "rvm/capistrano"
 
@@ -108,4 +108,10 @@ namespace :unicorn do
       find_and_execute_task("unicorn:stop")
       find_and_execute_task("unicorn:start")
     end
+end
+
+task :deploy_all do
+  find_and_execute_task("deploy:cleanup")
+  find_and_execute_task("deploy")
+  find_and_execute_task("unicorn:restart")
 end
