@@ -7,13 +7,11 @@ require 'bundler/capistrano'
 @a001 = "50.112.84.136"
 
 # Deploy server
-@servers = [@a001]
+@servers = [@linode]
 
 set :rvm_ruby_string, "2.0.0@accounts"
 set :rvm_type, :user
 require "rvm/capistrano"
-
-set :bundle_dir, '$HOME/.rvm/gems/ruby-1.9.3@accounts'
 
 default_run_options[:pty] = true
 set :user, "gaofei"
