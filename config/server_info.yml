@@ -1,0 +1,8 @@
+gaofei.local:
+ env: development
+
+dinotest:
+ env: development
+
+a001:
+ env: production

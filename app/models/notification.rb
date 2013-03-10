@@ -1,9 +1,20 @@
 # encoding: utf-8
 class Notification
-	HOST = "gateway.sandbox.push.apple.com"
+	HOST = case ServerInfo.current_env
+	when "production" 
+		"gateway.push.apple.com"
+	else
+		"gateway.sandbox.push.apple.com"
+	end
+
   PORT = 2195
   PASSPHRASE = '123'
-  CERT_FILE_PATH = Rails.root.join("const").join("aps-development.pem")
+  CERT_FILE_PATH = case ServerInfo.current_env
+  when "production"
+  	Rails.root.join("const").join("aps-production.pem")
+  else
+  	Rails.root.join("const").join("aps-development.pem")
+  end
 
   class << self
   	def connect_apn
