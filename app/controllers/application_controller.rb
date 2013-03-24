@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 		if request.env['HTTP_SIG'].nil?
 			render :json => {:error => "BAD_SIGNATURE"}, :status => 998 and return 
 		end
+
+		p "--- client locale: #{request.env['HTTP_CLIENT_AGENT']}---"
 		
 		cdate = request.env['HTTP_DATE'].to_i.to_s
 		sig  = request.env['HTTP_SIG'].to_s.downcase
