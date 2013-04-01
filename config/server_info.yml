@@ -6,3 +6,6 @@ dinotest:
 
 a001:
  env: production
+
+ali001:
+ env: production
