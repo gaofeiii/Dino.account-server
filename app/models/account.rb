@@ -1,15 +1,24 @@
 include SessionsHelper
 
 class Account < ActiveRecord::Base
-  attr_accessor :update_password
-  
+
   has_many :playings, :foreign_key => :account_id, :dependent => :destroy
 
   before_save :hex_username
 
   email_reg = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
   # TODO: 完成用户名的正则表达式
   # name_reg = /
+
+  ORIGIN_GUEST_NAME_REG = /Guest_[A-Za-z0-9]{7}/
+  HEXED_GUEST_NAME_REG = /Guest_[A-Za-z0-9]{7}_[A-Za-z0-9]{32}$}/
+
+  ORIGIN_NORMAL_NAME_REG = /[A-Za-z0-9\u4E00-\uFA29]{3,12}/
+  HEXED_NORMAL_NAME_REG =/[A-Za-z0-9\u4E00-\uFA29]{2,16}_[A-Za-z0-9]{32}$/
+
+  HEXED_REG = /_[A-Za-z0-9]{32}$/
+
   has_secure_password
 
   before_save :init_email
@@ -58,7 +67,15 @@ class Account < ActiveRecord::Base
   end
 
   def is_hexed_username?
-    self.username.length > 32
+    !!(self.username =~ HEXED_REG)
+  end
+
+  def ori_name
+    if is_hexed_username?
+      username.gsub(HEXED_REG, '')
+    else
+      username
+    end
   end
 
   def as_json(args = nil)
@@ -71,7 +88,9 @@ class Account < ActiveRecord::Base
 
   protected
   def hex_username
-    self.username = hexed_username(username) unless is_hexed_username?
+    if password
+      self.username = hexed_username(ori_name, password)
+    end
   end
 
 
