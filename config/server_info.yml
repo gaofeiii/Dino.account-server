@@ -10,5 +10,5 @@ a001:
 ali001:
  env: production
 
-local:
+ubuntu:
  env: development
