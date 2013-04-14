@@ -9,3 +9,6 @@ a001:
 
 ali001:
  env: production
+
+local:
+ env: development
