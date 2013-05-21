@@ -17,9 +17,9 @@ else
 end
 
 
-puts "--- Unicorn: the worker_processes is #{proc_count} ---"
+puts "--- Unicorn: the cpu core number is #{proc_count} ---"
 
-worker_processes proc_count
+worker_processes 1
 
 working_directory "/var/games/servers/accounts/current"
 
