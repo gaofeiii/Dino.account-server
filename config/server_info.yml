@@ -1,6 +1,9 @@
 gaofei.local:
  env: development
 
+linode:
+ env: production
+
 dinotest:
  env: development
 

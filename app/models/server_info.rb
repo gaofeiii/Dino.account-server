@@ -19,6 +19,6 @@ class ServerInfo
 	end
 
 	def self.current_env
-		current[:env]
+		current[:env] | 'development'
 	end
 end

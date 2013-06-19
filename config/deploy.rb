@@ -26,7 +26,7 @@ set :rails_env, :production
 set :use_sudo, false
 set :keep_releases, 5
 
-set :repository,  "git@106.187.91.156:magic0fei/ds1-account-server.git"
+set :repository,  "git@106.187.91.156:dinostyle/account-server.git"
 set :scm, :git
 set :branch, "master"
 
@@ -88,7 +88,7 @@ end
 
 # 如果有rvmrc文件需要执行 trust_rvmrc
 # after "deploy", "rvm:trust_rvmrc"
-after "deploy", "deploy:migrate"
+# after "deploy", "deploy:migrate"
 # after "deploy", "assets:precompile"
 
 namespace :unicorn do
