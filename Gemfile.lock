@@ -135,6 +135,8 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    puma (2.1.1)
+      rack (>= 1.1, < 2.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -240,6 +242,7 @@ DEPENDENCIES
   jquery-rails
   meta_search (>= 1.1.0.pre)
   mysql2
+  puma
   rails (~> 3.2.6)
   rspec-rails (~> 2.0)
   rvm-capistrano
