@@ -51,7 +51,7 @@ pidfile '/var/games/servers/accounts/shared/pids/puma.pid'
 # (“append”) specifies whether the output is appended, the default is
 # “false”.
 #
-stdout_redirect '/var/games/servers/accounts/shared/log/stdout.log', '/var/games/servers/accounts/shared/log/stderr.log'
+stdout_redirect '/var/games/servers/accounts/shared/log/puma.stdout.log', '/var/games/servers/accounts/shared/log/puma.stderr.log'
 # stdout_redirect '/u/apps/lolcat/log/stdout', '/u/apps/lolcat/log/stderr', true
 
 # Disable request logging.
