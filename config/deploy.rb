@@ -9,7 +9,7 @@ require 'bundler/capistrano'
 @local = "192.168.1.201"
 
 # Deploy server
-@servers = [@linode]
+@servers = [@ali001]
 
 set :rvm_ruby_string, "2.0.0@ds1-account"
 set :rvm_type, :user
@@ -117,7 +117,7 @@ namespace :puma do
   end
 
   task :stop, :roles => :app do
-    run "sudo kill -QUIT cat `#{deployed_path}/shared/pids/puma.pid`"
+    run "sudo kill -QUIT `cat #{deploy_to}/shared/pids/puma.pid`"
   end
 
 end
