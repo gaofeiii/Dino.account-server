@@ -9,9 +9,9 @@ require 'bundler/capistrano'
 @local = "192.168.1.201"
 
 # Deploy server
-@servers = [@ali001]
+@servers = [@local]
 
-set :rvm_ruby_string, "2.0.0@ds1-account"
+set :rvm_ruby_string, "2.0.0@accounts"
 set :rvm_type, :user
 require "rvm/capistrano"
 
@@ -26,7 +26,7 @@ set :rails_env, :production
 set :use_sudo, false
 set :keep_releases, 5
 
-set :repository,  "git@106.187.91.156:dinostyle/account-server.git"
+set :repository,  "gitolite@192.168.1.201:dinostyle.account-server.git"
 set :scm, :git
 set :branch, "master"
 
