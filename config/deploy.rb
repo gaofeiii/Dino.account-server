@@ -3,13 +3,33 @@
 require 'bundler/capistrano'
 
 # Server list
-@linode = "106.187.91.156"
-@a001 = "50.112.84.136"
 @ali001 = "42.120.23.41"
-@local = "192.168.1.201"
+@local = "192.168.1.204"
 
 # Deploy server
-@servers = [@local]
+@servers = {
+  'ali001' => @ali001,
+  'local' => @local
+}
+
+# ===== Manually choose an target server. =====
+require 'ap'
+system('clear')
+puts "--- Choose a server to deploy ---\n"
+ap @servers
+puts
+target = Capistrano::CLI.ui.ask "--- Type the server name ---"
+
+until @servers.keys.include?(target)
+  target = Capistrano::CLI.ui.ask "--- No such server: '#{target}', please try again or press CTRL+C to quit ---"
+end
+
+target_ip = [@servers[target]]
+
+system('clear')
+puts "  * You have chosen '#{target}' IP: #{@servers[target]} to deploy\n\n"
+
+# ===== End =====
 
 set :rvm_ruby_string, "2.0.0@accounts"
 set :rvm_type, :user
@@ -21,12 +41,12 @@ set :runner, "gaofei"
 set :ssh_options,   { :forward_agent => true }
 set :application, "accounts"
 set :deploy_to, "/var/games/servers/#{application}"
-set :deploy_via, :remote_cache
+# set :deploy_via, :remote_cache
 set :rails_env, :production
 set :use_sudo, false
 set :keep_releases, 5
 
-set :repository,  "gitolite@192.168.1.201:dinostyle.account-server.git"
+set :repository,  "gitolite@magic0fei.eicp.net:dinostyle.account-server.git"
 set :scm, :git
 set :branch, "master"
 
@@ -36,9 +56,9 @@ set :branch, "master"
 #   role :db, svr, :primary => true
 # end
 
-role :web, *@servers
-role :app, *@servers
-role :db,  *@servers, :primary => true # This is where Rails migrations will run
+role :web, *target_ip
+role :app, *target_ip
+role :db,  *target_ip, :primary => true # This is where Rails migrations will run
 
 # namespace :deploy do
 #   %w(start stop restart).each do |action|
@@ -111,13 +131,17 @@ namespace :unicorn do
 end
 
 namespace :puma do
-  desc "Start puma"
   task :start, :roles => :app do
     run "cd #{current_path} && bundle exec puma -C #{current_path}/config/puma.rb"
   end
 
   task :stop, :roles => :app do
     run "sudo kill -QUIT `cat #{deploy_to}/shared/pids/puma.pid`"
+  end
+
+  task :restart, :roles => :app do
+    find_and_execute_task("puma:stop")
+    find_and_execute_task("puma:start")
   end
 
 end

@@ -64,7 +64,7 @@ class SessionsController < ApplicationController
     render :json => { 
                       :success    => true,
                       :account_id => account.id,
-                      :username   => username, 
+                      :username   => account.username, 
                       :password   => account.password
                     }
   end

@@ -34,6 +34,7 @@ group :development do
   # The gems below are for deployment, make sure the rvm version is >= 1.11.3
   gem 'capistrano'
   gem 'rvm-capistrano'
+  gem 'awesome_print'
 end
 
 group :test do

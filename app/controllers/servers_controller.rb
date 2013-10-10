@@ -12,17 +12,19 @@ class ServersController < ApplicationController
 			render :json => Server.all and return
   	end
 
-    if client_locale.in?(['cn', 'zh-Hans'])
-      servers = Server.where(:locale => 'cn')
-    else
-      # game = Game.find_by_name(params[:game_name])
-      servers = Server.where(:locale => 'en')
-    end
+    # if client_locale.in?(['cn', 'zh-Hans'])
+    #   servers = Server.where(:locale => 'cn')
+    # else
+    #   # game = Game.find_by_name(params[:game_name])
+    #   servers = Server.where(:locale => 'en')
+    # end
 
-    if Rails.env.development?
-      servers = Server.all
-    end
-  	
+    # if Rails.env.development?
+    #   servers = Server.all
+    # end
+
+  	servers = Server.all
+    
     render :json => servers
   end
   
